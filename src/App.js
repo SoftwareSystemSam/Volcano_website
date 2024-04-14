@@ -1,12 +1,13 @@
 import './App.css';
 import { useState, useEffect } from "react";
 // import SearchBar from './components/SearchBar';
-import { login } from './api';
-//import { getVolcanoDetails } from './api';
+import { login, getCountriesWithVolcanoes } from './api';
+
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-balham.css";
 import React, { useRef } from 'react';
+
 //import { Button, Badge } from "reactstrap";
 // import { useNavigate } from "react-router-dom";
 import VolcanoGrid from './VolcanoGrid';
@@ -15,6 +16,8 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  // Login function
   const handleLogin = () => {
     if (email && password) {
       // Call your login API function
@@ -32,14 +35,19 @@ function App() {
       setError('Please enter both email and password.');
     }
   };
+
   //Volcano Grid stuff
   const [rowData, setRowData] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    fetch("My Api blah blah")
-      .then(res => res.json())
-      .then(volcanoesData => {
-        setRowData(volcanoesData)
+    getCountriesWithVolcanoes()
+      .then(countriesData => {
+        console.log(countriesData); // Check the fetched data structure
+        setCountries(countriesData);
+      })
+      .catch(error => {
+        console.error('Error fetching countries:', error);
       });
   }, []);
 
@@ -59,10 +67,10 @@ function App() {
         <button onClick={handleLogin}>Login</button>
         {/* Other button here, e.g., for getting volcano details */}
         <h1>Volcano Catalogue</h1>
-        <VolcanoGrid/>
-
+        <VolcanoGrid countries={countries} />
+        {error && <p className="error">{error}</p>}
       </div>
-      {error && <p className="error">{error}</p>}
+
     </div>
   );
 }

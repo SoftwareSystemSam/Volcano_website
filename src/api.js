@@ -62,16 +62,11 @@ export const login = (email, password) => {
   };
 
   
-export function getCountriesWithVolcanoes() {
-    const url = `${API_URL}/countries`
+  export function getCountriesWithVolcanoes() {
+    const url = `${API_URL}/countries`;
     return fetch(url)
-      .then((res) => res.json())
-      .then((data) =>
-        data.map((country) => ({
-          name: country.name
-        }))
-      );
-  }
+      .then((res) => res.json()); // This will return the array of country names
+}
 
   export function getVolcanoWithCountries(country,distance) {
     const url = `${API_URL}/volcanoes?country=${country}&populatedWithin=${distance}km`

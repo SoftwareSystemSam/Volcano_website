@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
@@ -12,6 +12,17 @@ const VolcanoGrid = () => {
     const [selectedDistance, setSelectedDistance] = useState('');
     const [rowData, setRowData] = useState([]);
 
+
+    useEffect(() => {
+        getCountriesWithVolcanoes()
+            .then(countryNames => {
+                setCountries(countryNames); // Set the array of country names directly
+            })
+            .catch(error => {
+                console.error('Error fetching countries:', error);
+            });
+    }, []);
+
     useEffect(() => {
         getCountriesWithVolcanoes().then(setCountries);
     }, []);
@@ -22,27 +33,46 @@ const VolcanoGrid = () => {
         }
     }, [selectedCountry, selectedDistance]);
 
-    const handleCountryChange = (event) => {
-        setSelectedCountry(event.target.value);
-        setRowData([]);
-        setSelectedDistance('');
-    }
+    useEffect(() => {
+        if (selectedCountry && selectedDistance) {
+            getVolcanoWithCountries(selectedCountry, selectedDistance)
+                .then(volcanoes => {
+                    setRowData(volcanoes);
+                })
+                .catch(error => {
+                    console.error('Failed to fetch volcanoes:', error);
+                    setRowData([]); // Reset the row data if there's an error
+                });
+        }
+    }, [selectedCountry, selectedDistance]);
 
-    const handleDistanceChange = (event) => {
-        setSelectedDistance(event.target.value);
-    }
+    // const handleCountryChange = (event) => {
+    //     setSelectedCountry(event.target.value);
+    //     setRowData([]);
+    //     setSelectedDistance('');
+    // }
+
+    // const handleDistanceChange = (event) => {
+    //     setSelectedDistance(event.target.value);
+    // }
+
+    const columnDefs = [
+        { headerName: "Name", field: "name", sortable: true, filter: true },
+        { headerName: "Region", field: "region", sortable: true, filter: true },
+        { headerName: "Subregion", field: "subregion", sortable: true, filter: true },
+        // ... add more columns as needed based on the volcano data structure ...
+    ];
 
     return (
-
         <div>
-            <select value={selectedCountry} onChange={handleCountryChange}>
+            <select onChange={(e) => setSelectedCountry(e.target.value)} value={selectedCountry}>
                 <option value="">Select a country</option>
                 {countries.map((country, index) => (
-                    <option key={index} value={country.name}>{country.name}</option>
+                    <option key={index} value={country}>{country}</option>
                 ))}
             </select>
 
-            <select value={selectedDistance} onChange={handleDistanceChange}>
+            <select onChange={(e) => setSelectedDistance(e.target.value)} value={selectedDistance}>
                 <option value="">Select a distance</option>
                 <option value="5">5km</option>
                 <option value="10">10km</option>
@@ -50,17 +80,12 @@ const VolcanoGrid = () => {
                 <option value="100">100km</option>
             </select>
 
-            <div
-                className="ag-theme-balham"
-                style={{ height: "500px", width: "100%" }}
-            >
+            <div className="ag-theme-balham" style={{ height: '500px', width: '100%' }}>
                 <AgGridReact
-                    columnDefs={[
-                        { headerName: "Name", field: "name" },
-                        // ... other column definitions ...
-                    ]}
+                    columnDefs={columnDefs}
                     rowData={rowData}
-                // ... other grid options ...
+                    pagination={true}
+                    paginationPageSize={10}
                 />
             </div>
         </div>
