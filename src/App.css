@@ -20,3 +20,24 @@
   color: #61dafb;
 }
 
+nav {
+  padding: 1em;
+}
+
+nav a {
+ 
+  margin-right: 10px;
+  text-decoration: none;
+  color: #1E88E5; /*https://davidmathlogic.com/colorblind/#%23D81B60-%231E88E5-%23FFC107-%23004D40*/
+  font-size: 1em;
+}
+
+
+nav a:hover {
+  
+  text-decoration: underline;
+}
+
+.volcano-detail {
+  margin-bottom: 25px; 
+}

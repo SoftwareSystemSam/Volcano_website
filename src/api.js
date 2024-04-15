@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+
 
 const API_URL = `http://4.237.58.241:3000`;
 
@@ -19,7 +19,7 @@ export const login = (email, password) => {
         }
         return res.json();
     })
-    .then((response) => { // Correctly passing 'response' as an argument
+    .then((response) => { 
         localStorage.setItem("token", response.token);
         return response;
     });
@@ -65,7 +65,7 @@ export const login = (email, password) => {
   export function getCountriesWithVolcanoes() {
     const url = `${API_URL}/countries`;
     return fetch(url)
-      .then((res) => res.json()); // This will return the array of country names
+      .then((res) => res.json()); 
 }
 
   export function getVolcanoWithCountries(country,distance) {
@@ -94,12 +94,12 @@ export const login = (email, password) => {
     };
 
     if(token){
-        headers["Authorization"] = 'Bearer ${token}';
+        headers["Authorization"] = `Bearer ${token}`;
     }
 
     return fetch(url, {
         method: "GET",
-        headers: headers, // Use the headers object
+        headers: headers,
       })
       .then((res) => {
           if (!res.ok) {
@@ -108,7 +108,7 @@ export const login = (email, password) => {
           return res.json();
       })
       .then((volcano) => ({
-          // Return the properties inside an object
+          
           name: volcano.name,
           country: volcano.country,
           region: volcano.region,
@@ -121,7 +121,7 @@ export const login = (email, password) => {
       }))
       .catch((error) => {
           console.error(error);
-          // You can handle the error as appropriate for your application
+        
           throw error;
       });
   };

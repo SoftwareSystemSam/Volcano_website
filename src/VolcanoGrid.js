@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
-import { useNavigate } from "react-router-dom";
 import { getCountriesWithVolcanoes, getVolcanoWithCountries } from './api';
 
 
-const VolcanoGrid = () => {
+
+const VolcanoGrid = ({ onVolcanoClick}) => {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedDistance, setSelectedDistance] = useState('');
@@ -16,7 +16,7 @@ const VolcanoGrid = () => {
     useEffect(() => {
         getCountriesWithVolcanoes()
             .then(countryNames => {
-                setCountries(countryNames); // Set the array of country names directly
+                setCountries(countryNames);
             })
             .catch(error => {
                 console.error('Error fetching countries:', error);
@@ -41,26 +41,16 @@ const VolcanoGrid = () => {
                 })
                 .catch(error => {
                     console.error('Failed to fetch volcanoes:', error);
-                    setRowData([]); // Reset the row data if there's an error
+                    setRowData([]);
                 });
         }
     }, [selectedCountry, selectedDistance]);
-
-    // const handleCountryChange = (event) => {
-    //     setSelectedCountry(event.target.value);
-    //     setRowData([]);
-    //     setSelectedDistance('');
-    // }
-
-    // const handleDistanceChange = (event) => {
-    //     setSelectedDistance(event.target.value);
-    // }
 
     const columnDefs = [
         { headerName: "Name", field: "name", sortable: true, filter: true },
         { headerName: "Region", field: "region", sortable: true, filter: true },
         { headerName: "Subregion", field: "subregion", sortable: true, filter: true },
-        // ... add more columns as needed based on the volcano data structure ...
+
     ];
 
     return (
@@ -86,8 +76,11 @@ const VolcanoGrid = () => {
                     rowData={rowData}
                     pagination={true}
                     paginationPageSize={10}
+                    onRowClicked={(event) => onVolcanoClick(event.data.id)}
                 />
             </div>
+
+          
         </div>
     );
 };

@@ -5,6 +5,7 @@ import Login from './Login';
 import Register from './Register';
 import VolcanoList from './Volcano-List';
 import HomeContent from './components/HomeContent';
+import Volcano from './Volcano';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/volcano-list" element={<VolcanoList />} />
+          <Route path="/volcano/:id" element={<Volcano />} />
           {/* other routes as needed */}
         </Routes>
       </div>

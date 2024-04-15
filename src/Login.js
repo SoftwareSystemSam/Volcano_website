@@ -8,21 +8,21 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-    // Login function
+    
     const handleLogin = () => {
         if (email && password) {
-            // Call your login API function
+            
             login(email, password)
                 .then(response => {
                     console.log('Login successful', response);
                     // Handle successful login, e.g., redirect or show user dashboard
                 })
                 .catch(error => {
-                    // Handle login error, display message from API if available
+                    
                     setError(error.message || 'Login failed, please try again.');
                 });
         } else {
-            // Simple front-end validation
+          
             setError('Please enter both email and password.');
         }
     };

@@ -16,7 +16,7 @@ function SearchBar({ onSubmit }) {
         <button
           id="search-button"
           type="button"
-          onClick={() => onSubmit(innerSearch)} // Directly use destructured prop
+          onClick={() => onSubmit(innerSearch)} 
         >
           Search
         </button>
