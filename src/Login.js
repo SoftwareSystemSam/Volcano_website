@@ -1,21 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { login } from './api';
+import { useAuth } from './components/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const {login} = useAuth();
 
-    
     const handleLogin = () => {
         if (email && password) {
             
             login(email, password)
                 .then(response => {
                     console.log('Login successful', response);
-                    // Handle successful login, e.g., redirect or show user dashboard
+                    localStorage.setItem("token", response.token);
+                    navigate('/');
                 })
                 .catch(error => {
                     
@@ -38,7 +40,7 @@ const Login = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
             <button onClick={handleLogin}>Login</button>
-            {/* login page content goes here */}
+            {error && <div className="error">{error}</div>}
         </div>
     );
 }

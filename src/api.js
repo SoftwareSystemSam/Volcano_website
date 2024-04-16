@@ -3,7 +3,7 @@
 const API_URL = `http://4.237.58.241:3000`;
 
 
-export const login = (email, password) => {
+export const apiLogin = (email, password) => {
     const url = `${API_URL}/user/login`;
     return fetch(url, {
         method: "POST",
@@ -12,15 +12,21 @@ export const login = (email, password) => {
         },
         body: JSON.stringify({ email, password }),
     })
-        .then((res) => {
-            if (!res.ok) {
-                throw new Error('Login failed.');
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
             }
-            return res.json();
+            else{
+                return response.json().then(json => Promise.reject(json));
+            }
+            
         })
         .then((response) => {
             localStorage.setItem("token", response.token);
             return response;
+        })
+        .catch(error=>{
+            throw new Error(error.message || 'Login failed, please try again.');
         });
 };
 
@@ -35,22 +41,27 @@ export const register = (email, password) => {
         },
         body: JSON.stringify({ email, password }),
     })
-        .then((res) => res.json())
-        .then((response) => {
-            console.log(response.message);
-            return response;
-        })
-}
+    .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(json => Promise.reject(json));
+        }
+      })
+      .catch(error => {
+        throw new Error(error.message || 'Registration failed, please try again.');
+      });
+    };
 
 export const getAuthenticatedResource = (resourceId) => {
     const url = `${API_URL}/${resourceId}`;
-    const token = localStorage.getItem("token"); // Retrieve the stored token
+    const token = localStorage.getItem("token"); 
 
     return fetch(url, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}` // Include the token in the Authorization header
+            "Authorization": `Bearer ${token}` 
         },
     })
         .then((res) => res.json())
