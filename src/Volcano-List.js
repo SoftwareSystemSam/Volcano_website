@@ -29,7 +29,6 @@ const Volcano_List = () => {
     return (
         <div>
             <h1>Search Volcanoes via Country</h1>
-            {/* Volano list page content goes here */}
             <h1>Volcano Catalogue</h1>
         <VolcanoGrid countries={countries}
         onVolcanoClick={handleVolcanoClick} />

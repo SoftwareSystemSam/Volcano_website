@@ -24,7 +24,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/volcano-list" element={<VolcanoList />} />
             <Route path="/volcano/:id" element={<Volcano />} />
-            {/* other routes as needed */}
+            
           </Routes>
         </div>
       </Router>

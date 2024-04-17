@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       .then(data => {
         localStorage.setItem('token', data.token); // Assuming 'data' has a 'token'
         setIsAuthenticated(true);
-        return data; // In case you need the response data after login
+        return data; 
       });
   };
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   // The value that will be given to the context consumers
   const value = {
     isAuthenticated,
-    login, // Make sure you provide this method so it can be used in the components
+    login, 
     logout
   };
 
