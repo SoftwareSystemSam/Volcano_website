@@ -14,7 +14,7 @@ const Volcano_List = () => {
 
     const handleVolcanoClick = (volcanoId) => {
         navigate(`/volcano/${volcanoId}`);
-      };
+    };
 
     useEffect(() => {
         getCountriesWithVolcanoes()
@@ -30,9 +30,15 @@ const Volcano_List = () => {
         <div>
             <h1>Search Volcanoes via Country</h1>
             <h1>Volcano Catalogue</h1>
-        <VolcanoGrid countries={countries}
-        onVolcanoClick={handleVolcanoClick} />
-        {error && <p className="error">{error}</p>}
+            <p>
+                To explore the volcanoes, please start by selecting a country from the dropdown list.
+                Then, choose a distance to see the volcanoes within that radius. The list will populate
+                with information based on your selection.
+            </p>
+            <p>To learn more about a specific volcano, simply click on its name in the list below.</p>
+            <VolcanoGrid countries={countries}
+                onVolcanoClick={handleVolcanoClick} />
+            {error && <p className="error">{error}</p>}
         </div>
     );
 }

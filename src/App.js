@@ -9,6 +9,7 @@ import Volcano from './Volcano';
 import { Link } from 'react-router-dom';
 import { AuthProvider } from './components/AuthContext';
 import { useAuth } from './components/AuthContext';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navigation />
-        <div>
+        <div className = "Content">
           <Routes>
             <Route path="/" element={<HomeContent />} />
             <Route path="/login" element={<Login />} />
@@ -25,6 +26,7 @@ function App() {
             <Route path="/volcano/:id" element={<Volcano />} />
             
           </Routes>
+          <Footer />
         </div>
       </Router>
     </AuthProvider>
