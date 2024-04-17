@@ -16,16 +16,16 @@ export const apiLogin = (email, password) => {
             if (response.ok) {
                 return response.json();
             }
-            else{
+            else {
                 return response.json().then(json => Promise.reject(json));
             }
-            
+
         })
         .then((response) => {
             localStorage.setItem("token", response.token);
             return response;
         })
-        .catch(error=>{
+        .catch(error => {
             throw new Error(error.message || 'Login failed, please try again.');
         });
 };
@@ -41,27 +41,29 @@ export const register = (email, password) => {
         },
         body: JSON.stringify({ email, password }),
     })
-    .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.json().then(json => Promise.reject(json));
-        }
-      })
-      .catch(error => {
-        throw new Error(error.message || 'Registration failed, please try again.');
-      });
-    };
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return response.json().then(json => {
+                    throw new Error(json.message || 'Registration failed, please try again.');
+                });
+            }
+        })
+        .catch(error => {
+            throw error;
+        });
+};
 
 export const getAuthenticatedResource = (resourceId) => {
     const url = `${API_URL}/${resourceId}`;
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
 
     return fetch(url, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}` 
+            "Authorization": `Bearer ${token}`
         },
     })
         .then((res) => res.json())
@@ -120,32 +122,32 @@ export const getVolcanoDetails = (volcanoId) => {
         .then((volcano) => {
             // Volcano object for if user not logged in
             const volcanoDetails = {
-              name: volcano.name,
-              country: volcano.country,
-              region: volcano.region,
-              subregion: volcano.subregion,
-              last_eruption: volcano.last_eruption,
-              summit: volcano.summit,
-              elevation: volcano.elevation,
-              latitude: volcano.latitude,
-              longitude: volcano.longitude,
+                name: volcano.name,
+                country: volcano.country,
+                region: volcano.region,
+                subregion: volcano.subregion,
+                last_eruption: volcano.last_eruption,
+                summit: volcano.summit,
+                elevation: volcano.elevation,
+                latitude: volcano.latitude,
+                longitude: volcano.longitude,
             };
-            
+
             // If user logged in then they get extra info
             if (token) {
-              volcanoDetails.population_5km = volcano.population_5km;
-              volcanoDetails.population_10km = volcano.population_10km;
-              volcanoDetails.population_30km = volcano.population_30km;
-              volcanoDetails.population_100km = volcano.population_100km;
+                volcanoDetails.population_5km = volcano.population_5km;
+                volcanoDetails.population_10km = volcano.population_10km;
+                volcanoDetails.population_30km = volcano.population_30km;
+                volcanoDetails.population_100km = volcano.population_100km;
             }
-            
+
             return volcanoDetails;
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             console.error(error);
             throw error;
-          });
-        };
+        });
+};
 
 
 

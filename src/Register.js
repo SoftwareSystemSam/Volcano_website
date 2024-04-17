@@ -31,11 +31,11 @@ const Register = () => {
     if (email && password) {
       register(email, password)
         .then(response => {
-          console.log('Registration successful', response);
+          alert('Registration successful. You can now log in with your credentials.');
           navigate('/login');
         })
         .catch(error => {
-          setError(error.messgae || 'Registration failed, please try again.');
+          setError(error.message || 'Registration failed, please try again.');
         });
     } else {
       setError('Please enter a valid email and password');
