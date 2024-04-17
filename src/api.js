@@ -103,9 +103,9 @@ export const getVolcanoDetails = (volcanoId) => {
         "Content-Type": "application/json"
     };
 
-    // if (token) {
-    //     headers["Authorization"] = `Bearer ${token}`;
-    // }
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
     console.log("Token:", token);
     return fetch(url, {
         method: "GET",
@@ -117,24 +117,35 @@ export const getVolcanoDetails = (volcanoId) => {
             }
             return res.json();
         })
-        .then((volcano) => ({
-
-            name: volcano.name,
-            country: volcano.country,
-            region: volcano.region,
-            subregion: volcano.subregion,
-            last_eruption: volcano.last_eruption,
-            summit: volcano.summit,
-            elevation: volcano.elevation,
-            latitude: volcano.latitude,
-            longitude: volcano.longitude,
-        }))
-        .catch((error) => {
+        .then((volcano) => {
+            // Volcano object for if user not logged in
+            const volcanoDetails = {
+              name: volcano.name,
+              country: volcano.country,
+              region: volcano.region,
+              subregion: volcano.subregion,
+              last_eruption: volcano.last_eruption,
+              summit: volcano.summit,
+              elevation: volcano.elevation,
+              latitude: volcano.latitude,
+              longitude: volcano.longitude,
+            };
+            
+            // If user logged in then they get extra info
+            if (token) {
+              volcanoDetails.population_5km = volcano.population_5km;
+              volcanoDetails.population_10km = volcano.population_10km;
+              volcanoDetails.population_30km = volcano.population_30km;
+              volcanoDetails.population_100km = volcano.population_100km;
+            }
+            
+            return volcanoDetails;
+          })
+          .catch((error) => {
             console.error(error);
-
             throw error;
-        });
-};
+          });
+        };
 
 
 
