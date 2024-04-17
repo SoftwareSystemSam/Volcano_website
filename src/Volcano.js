@@ -87,11 +87,16 @@ function Volcano() {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false // My wife doesn't like the legend - she thinks its confusing because of all the different colors
+      }
+    },
     scales: {
       y: {
-        beginAtZero: true,
-      },
-    },
+        beginAtZero: true
+      }
+    }
   };
 
   // Start displaying data
