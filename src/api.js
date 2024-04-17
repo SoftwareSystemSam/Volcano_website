@@ -1,8 +1,6 @@
-
-
 const API_URL = `http://4.237.58.241:3000`;
 
-
+/* This entire page handles all of the API requests a user would make with the volcano api */
 export const apiLogin = (email, password) => {
     const url = `${API_URL}/user/login`;
     return fetch(url, {

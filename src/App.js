@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useRef } from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';

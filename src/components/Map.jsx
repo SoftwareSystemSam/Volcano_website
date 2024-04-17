@@ -1,3 +1,5 @@
+/* Guide on how to install Pigeon Maps -> https://pigeon-maps.js.org/docs/installation */
+
 import React from 'react';
 import { Map, Marker } from 'pigeon-maps';
 

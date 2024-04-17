@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVolcanoDetails } from './api';
 import MyMapComponent from './components/Map';
 import './App.css';
 import BarChartComponent from './components/Chart';
-import { AuthProvider, useAuth } from './components/AuthContext';
+import { useAuth } from './components/AuthContext';
 
 function Volcano() {
   const { id } = useParams();
@@ -69,12 +69,12 @@ function Volcano() {
           volcano.population_100km,
         ],
         backgroundColor: [
-          'rgba(75, 192, 192, 0.2)', 
+          'rgba(75, 192, 192, 0.2)',
           'rgba(153, 102, 255, 0.2)',
           'rgba(255, 159, 64, 0.2)',
           'rgba(54, 162, 235, 0.2)',
         ],
-        borderColor: ['rgba(75, 192, 192, 1)', 
+        borderColor: ['rgba(75, 192, 192, 1)',
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
           'rgba(54, 162, 235, 1)',

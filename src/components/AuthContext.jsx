@@ -1,3 +1,5 @@
+/* This guy gives good guide on setting up authContext -> https://www.sammeechward.com/use-context-auth */
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { apiLogin } from '../api';
 
@@ -35,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  // The value that will be given to the context consumers
+
   const value = {
     isAuthenticated,
     login, 
