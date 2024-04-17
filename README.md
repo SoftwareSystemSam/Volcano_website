@@ -1,3 +1,28 @@
+### This is my volcano webpage assignment for the class CAB230
+All of this assignment just deals with api calls from the universities volcano api, displays volcanoes using ag grids, then when you click on the volcano, it then shows you more data. If you arent logged in you see some basic stats plus where it is on the map.
+If you are logged in you get somepopulation density information with a bar graph. Exciting stuff.
+
+### Home page - you can see login and register as well as volcano list
+![image](https://github.com/SoftwareSystemSam/CAB230_Volcanoes_Assignment/assets/148069736/ee495628-f492-47dd-a246-bba132c267a7)
+
+
+### Volcano list data
+![image](https://github.com/SoftwareSystemSam/CAB230_Volcanoes_Assignment/assets/148069736/73caeea3-559e-4d48-8431-adf5490c3b4a)
+
+### Indepth data on volcano
+![image](https://github.com/SoftwareSystemSam/CAB230_Volcanoes_Assignment/assets/148069736/74bab385-c404-44ae-bcf0-a28359381d20)
+
+
+### If you are logged in, you get more information
+![image](https://github.com/SoftwareSystemSam/CAB230_Volcanoes_Assignment/assets/148069736/e871e040-3938-4537-8efb-de752e74b189)
+
+### APIs used
+Universities Volcano API
+Pigeon Maps
+ChartJS
+NPMjs
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -39,31 +64,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
 
