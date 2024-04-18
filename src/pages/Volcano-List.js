@@ -5,6 +5,7 @@ import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-balham.css";
 import { getCountriesWithVolcanoes } from '../api';
 import { useState, useEffect } from "react";
+import '../App.css';
 
 const Volcano_List = () => {
     //Volcano Grid stuff
@@ -27,7 +28,7 @@ const Volcano_List = () => {
             });
     }, []);
     return (
-        <div>
+        <div className="Content">
             <h1>Search Volcanoes via Country</h1>
             <h1>Volcano Catalogue</h1>
             <p>To explore the volcanoes:</p>

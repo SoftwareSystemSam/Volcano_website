@@ -101,31 +101,33 @@ function Volcano() {
 
   // Start displaying data
   return (
-    <div style={containerStyle}>
-      <div style={topContainerStyle}>
-        <div style={detailContainerStyle}>
-          <h2>{volcano.name}</h2>
-          <div style={detailContainerStyle}>Country: {volcano.country}</div>
-          <div style={detailContainerStyle}>Region: {volcano.region}</div>
-          <div style={detailContainerStyle}>Subregion: {volcano.subregion}</div>
-          <div style={detailContainerStyle}>Last Eruption: {volcano.last_eruption}</div>
-          <div style={detailContainerStyle}>Summit: {volcano.summit} m</div>
-          <div style={detailContainerStyle}>Elevation: {volcano.elevation} ft</div>
-          <div style={detailContainerStyle}>Latitude: {volcano.latitude}</div>
-          <div style={detailContainerStyle}>Longitude: {volcano.longitude}</div>
-          {volcano.population_5km && <div>Population within 5km: {volcano.population_5km}</div>}
-          {volcano.population_10km && <div>Population within 10km: {volcano.population_10km}</div>}
-          {volcano.population_30km && <div>Population within 30km: {volcano.population_30km}</div>}
-          {volcano.population_100km && <div>Population within 100km: {volcano.population_100km}</div>}
+    <div className="Content">
+      <div style={containerStyle}>
+        <div style={topContainerStyle}>
+          <div style={detailContainerStyle}>
+            <h2>{volcano.name}</h2>
+            <div style={detailContainerStyle}>Country: {volcano.country}</div>
+            <div style={detailContainerStyle}>Region: {volcano.region}</div>
+            <div style={detailContainerStyle}>Subregion: {volcano.subregion}</div>
+            <div style={detailContainerStyle}>Last Eruption: {volcano.last_eruption}</div>
+            <div style={detailContainerStyle}>Summit: {volcano.summit} m</div>
+            <div style={detailContainerStyle}>Elevation: {volcano.elevation} ft</div>
+            <div style={detailContainerStyle}>Latitude: {volcano.latitude}</div>
+            <div style={detailContainerStyle}>Longitude: {volcano.longitude}</div>
+            {volcano.population_5km && <div>Population within 5km: {volcano.population_5km}</div>}
+            {volcano.population_10km && <div>Population within 10km: {volcano.population_10km}</div>}
+            {volcano.population_30km && <div>Population within 30km: {volcano.population_30km}</div>}
+            {volcano.population_100km && <div>Population within 100km: {volcano.population_100km}</div>}
+          </div>
+          <div style={mapContainerStyle}>
+            <MyMapComponent latitude={volcano.latitude} longitude={volcano.longitude} />
+          </div>
         </div>
-        <div style={mapContainerStyle}>
-          <MyMapComponent latitude={volcano.latitude} longitude={volcano.longitude} />
+        <div style={chartContainerStyle}>
+          {isAuthenticated && (
+            <BarChartComponent chartData={populationData} chartOptions={chartOptions} />
+          )}
         </div>
-      </div>
-      <div style={chartContainerStyle}>
-        {isAuthenticated && (
-          <BarChartComponent chartData={populationData} chartOptions={chartOptions} />
-        )}
       </div>
     </div>
   );
