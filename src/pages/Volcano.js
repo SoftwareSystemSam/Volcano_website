@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getVolcanoDetails } from './api';
-import MyMapComponent from './components/Map';
-import './App.css';
-import BarChartComponent from './components/Chart';
-import { useAuth } from './components/AuthContext';
+import { getVolcanoDetails } from '../api';
+import MyMapComponent from '../components/Map';
+import '../App.css';
+import BarChartComponent from '../components/Chart';
+import { useAuth } from '../components/AuthContext';
 
 function Volcano() {
   const { id } = useParams();

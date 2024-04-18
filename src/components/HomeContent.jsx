@@ -1,5 +1,5 @@
 import React from 'react';
-import volcanoImage from '../volcano.jpg';
+import volcanoImage from '../images/volcano.jpg';
 
 export default function HomeContent() {
   return (

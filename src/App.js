@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useRef } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import VolcanoList from './Volcano-List';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import VolcanoList from './pages/Volcano-List';
 import HomeContent from './components/HomeContent';
-import Volcano from './Volcano';
+import Volcano from './pages/Volcano';
 import { Link } from 'react-router-dom';
 import { AuthProvider } from './components/AuthContext';
 import { useAuth } from './components/AuthContext';

@@ -150,3 +150,22 @@ h1, h2 {
     flex-direction: column;
   }
 }
+
+
+.ag-header-cell-label .ag-sort-ascending-icon,
+.ag-header-cell-label .ag-sort-descending-icon,
+.ag-header-cell-label .ag-sort-none-icon {
+    opacity: 1 !important; 
+}
+
+
+.ag-header-cell-label .ag-sort-ascending-icon,
+.ag-header-cell-label .ag-sort-descending-icon,
+.ag-header-cell-label .ag-sort-none-icon {
+    display: inline-block !important;
+}
+
+.ag-header-cell-menu-button {
+  opacity: 1 !important;
+  transition: opacity 0.2s ease;
+}
