@@ -75,24 +75,38 @@ export const getAuthenticatedResource = (resourceId) => {
 export function getCountriesWithVolcanoes() {
     const url = `${API_URL}/countries`;
     return fetch(url)
-        .then((res) => res.json());
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('Failed to fetch countries');
+            }
+            return res.json();
+        })
+        .catch((error) => {
+            console.error(error);
+            throw error; 
+        });
 }
 
 export function getVolcanoWithCountries(country, distance) {
-    const url = `${API_URL}/volcanoes?country=${country}&populatedWithin=${distance}km`
+    const url = `${API_URL}/volcanoes?country=${country}&populatedWithin=${distance}km`;
     return fetch(url)
-        .then((res) => res.json())
-        .then((data) =>
-            data.map((volcano) => ({
-
-                id: volcano.id,
-                name: volcano.name,
-                country: volcano.country,
-                region: volcano.region,
-                subregion: volcano.subregion
-
-            }))
-        );
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error('Failed to fetch volcanoes for the given country and distance');
+            }
+            return res.json();
+        })
+        .then((data) => data.map((volcano) => ({
+            id: volcano.id,
+            name: volcano.name,
+            country: volcano.country,
+            region: volcano.region,
+            subregion: volcano.subregion,
+        })))
+        .catch((error) => {
+            console.error(error);
+            throw error; 
+        });
 }
 
 export const getVolcanoDetails = (volcanoId) => {
